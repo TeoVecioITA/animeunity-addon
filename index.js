@@ -1,5 +1,6 @@
 const { addonBuilder } = require("stremio-addon-sdk");
 const express = require("express");
+const cors = require("cors");
 const puppeteer = require("puppeteer");
 
 const manifest = {
@@ -23,7 +24,7 @@ builder.defineStreamHandler(async ({ id }) => {
   return Promise.resolve({ streams });
 });
 
-// 🔍 Funzione per ottenere il titolo (statico per test)
+// 🔍 Titolo statico per test
 async function getTitleFromId(id) {
   return "One Piece"; // puoi collegarlo a TMDB o Kitsu in futuro
 }
@@ -64,13 +65,16 @@ const app = express();
 const PORT = process.env.PORT || 7000;
 const addonInterface = builder.getInterface();
 
+// ✅ Abilita CORS
+app.use(cors());
+
 // 🔁 Serve il manifest
 app.get("/manifest.json", (req, res) => {
   res.send(addonInterface.manifest);
 });
 
-// 🔁 Serve le risorse
-app.get("/:resource/:type/:id{/:extra}.json", (req, res) => {
+// 🔁 Serve le risorse (Express 5 compatibile)
+app.get(/^\/([^\/]+)\/([^\/]+)\/([^\/]+)(?:\/([^\/]+))?\.json$/, (req, res) => {
   addonInterface(req, res);
 });
 
