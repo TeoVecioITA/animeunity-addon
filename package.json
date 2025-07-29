@@ -1,13 +1,13 @@
 {
   "name": "animeunity-addon",
   "version": "1.0.0",
-  "description": "",
+  "description": "Addon Stremio per lo streaming di anime da AnimeUnity",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["stremio", "addon", "anime", "animeunity", "scraper"],
+  "author": "Teo",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
