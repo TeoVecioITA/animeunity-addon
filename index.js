@@ -70,7 +70,7 @@ app.get("/manifest.json", (req, res) => {
 });
 
 // 🔁 Serve le risorse
-app.get("/:resource/:type/:id/:extra?.json", (req, res) => {
+app.get("/:resource/:type/:id{/:extra}.json", (req, res) => {
   addonInterface(req, res);
 });
 
